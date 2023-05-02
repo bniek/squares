@@ -1,0 +1,26 @@
+{%load static%}
+
+
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static "css/recipes.css" %}">
+        <title class="title-list">{% block title %}{% endblock title %}</title>
+    </head>
+    <body>
+        <header>
+            <nav class="nav-bar">
+                <a id="nav-link" href="{% url 'recipe_list' %}">MAIN PAGE</a>
+                <a id="nav-link" href="{% url 'create_recipe' %}">CREATE RECIPE</a>
+            </nav>
+        </header>
+
+        {% block content %}{% endblock content %}
+
+        <footer class="footer-settings"></footer>
+
+
+
+
+    </body>
+</html>

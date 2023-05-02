@@ -1,0 +1,70 @@
+{%load static%}
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static "css/recipes.css" %}">
+        <title>{{ recipe_object.title }} - Scrumptious Recipes</title>
+    </head>
+    <body>
+        <header>
+            <nav class="nav-bar">
+                <a id="nav-link" href="{% url 'recipe_list' %}">MAIN PAGE</a>
+                {% if user.is_authenticated %}
+                <a id="nav-link" href="{% url 'create_recipe' %}">CREATE RECIPE</a>
+                <a id="nav-link" href="{% url 'edit_recipe' recipe_object.id %}">EDIT THIS RECIPE</a>
+                <a id="nav-link">HI, {{ user.username }}</a>
+                <a id="nav-link" href="{% url 'user_logout' %}">LOGOUT</a>
+                {% else %}
+                <a id="nav-link" href="{% url 'signup' %}">SIGN UP</a>
+                <a id="nav-link" href="{% url 'user_login' %}">LOGIN</a>
+                {% endif %}
+
+            </nav>
+        </header>
+        <h1 class="title-detail">
+            <a href="/Users/benniek/hack-reactor/projects/recipe-web-pages/detail.html">
+            {{ recipe_object.title }}
+            </a>
+        </h1>
+        <img class="detail-image"src="{{ recipe_object.picture }}"
+             alt="Vegetarian tacos"
+            >
+        <div class ="star_detail">★ 4.3</div>
+
+        <p class="recipe-descrip">{{ recipe_object.description }}</p>
+
+
+        <h2 class="ingred">Ingredients</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Food item</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingredient in recipe_object.ingredients.all %}
+                <tr>
+                    <td>{{ ingredient.amount }}</td>
+                    <td>{{ ingredient.food_item }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <h2 class="steps">Steps</h3>
+            <ol>
+                {% for step in recipe_object.steps.all %}
+                <li>{{ step.instruction }}</li>
+                {% endfor %}
+            </ol>
+
+
+
+        <footer class="footer-settings"></footer>
+
+
+
+    </body>
+</html>
